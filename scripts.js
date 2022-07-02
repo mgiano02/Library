@@ -9,16 +9,37 @@ function Book(title, author, pages, read) {
     this.read = read;
 }
 
+const container = document.querySelector('#container');
+const card = document.querySelector('.card');
+const newBtn = document.querySelector('#newBtn');
+
 // Prompts user to enter information on a book to run it through the object constructor and store
 // it in the myLibrary array
-function addBookToLibrary() {
+// function addBookToLibrary() {
+//     let bookTitle = prompt('What is the title of the book?');
+//     let bookAuthor = prompt('Who is the author of the book?');
+//     let bookPages = prompt('How many pages long is this book?');
+//     let bookRead = prompt('Has this book been read?');
+//     const book = new Book(bookTitle, bookAuthor, bookPages, bookRead);
+//     myLibrary.push(book);
+// }
+
+
+newBtn.addEventListener('click', function() {
     let bookTitle = prompt('What is the title of the book?');
     let bookAuthor = prompt('Who is the author of the book?');
     let bookPages = prompt('How many pages long is this book?');
     let bookRead = prompt('Has this book been read?');
     const book = new Book(bookTitle, bookAuthor, bookPages, bookRead);
     myLibrary.push(book);
-}
+    // Remove if statement if removing starter books below
+    if (myLibrary[3]) {
+        while (container.hasChildNodes()) {
+            container.removeChild(container.firstChild);
+        }
+    }
+    librayDisplay();
+})
 
 // Starter books to display and get pushed into the library
 const book1 = new Book('The Hobbit', 'J.R.R. Tolkien', '295', 'not read');
@@ -26,7 +47,6 @@ myLibrary.push(book1);
 const book2 = new Book('The Lord of the Rings', 'J.R.R. Tolkien', '498', 'read');
 myLibrary.push(book2);
 
-const card = document.querySelector('.card');
 
 // Displays books in the library list
 function librayDisplay() {
@@ -39,5 +59,3 @@ function librayDisplay() {
         myLibrary[i].pages + ' | ' + myLibrary[i].read
     }
 }
-
-// librayDisplay()
