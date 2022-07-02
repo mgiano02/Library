@@ -1,0 +1,10 @@
+/* #container {
+    background-color: green;
+} */
+
+.card {
+    background-color: limegreen;
+    border: 1px solid rgb(11, 126, 126);
+    width: auto;
+    height: auto;
+}

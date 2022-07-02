@@ -20,16 +20,24 @@ function addBookToLibrary() {
     myLibrary.push(book);
 }
 
+// Starter books to display and get pushed into the library
 const book1 = new Book('The Hobbit', 'J.R.R. Tolkien', '295', 'not read');
 myLibrary.push(book1);
 const book2 = new Book('The Lord of the Rings', 'J.R.R. Tolkien', '498', 'read');
-myLibrary.push(book1);
-// addBookToLibrary(1, 2, 3, 4);
+myLibrary.push(book2);
 
+const card = document.querySelector('.card');
 
+// Displays books in the library list
 function librayDisplay() {
-    for (let i = 0; i <= myLibrary.length; i++) {
-        console.log(myLibrary[i]);
+    for (let i = 0; i < myLibrary.length; i++) {
+        const div = document.createElement('div');
+        div.classList.add('card');
+        container.appendChild(div);
+        // div.innerText = book1.title + '| ' + book1.author + '| ' + book1.pages + '| ' + book1.read;
+        div.innerText = myLibrary[i].title + ' | ' + myLibrary[i].author + ' | ' + 
+        myLibrary[i].pages + ' | ' + myLibrary[i].read
     }
 }
 
+// librayDisplay()
