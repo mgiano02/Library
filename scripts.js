@@ -36,9 +36,9 @@ function addBookToLibrary() {
 }
 
 // Starter books to display and get pushed into the library
-const book1 = new Book('The Hobbit', 'J.R.R. Tolkien', '295', 'not read');
+const book1 = new Book('The Hobbit', 'J.R.R. Tolkien', '310', 'Not read');
 myLibrary.push(book1);
-const book2 = new Book('The Lord of the Rings', 'J.R.R. Tolkien', '498', 'read');
+const book2 = new Book('The Fellowship of the Ring', 'J.R.R. Tolkien', '437', 'Read');
 myLibrary.push(book2);
 
 
@@ -59,34 +59,35 @@ function librayDisplay() {
 
         let bookCard = document.createElement('div');
         bookCard.classList.add('card');
-        // bookCard.setAttribute('bookNum', myLibrary.indexOf(book));
         bookCard.append(title, author, pages, read, removeBookBtn());
         container.append(bookCard);
         applyIndex();
     })
 }
 
-
+// Adds Remove button with a click event
 function removeBookBtn() {
     const rmBtn = document.createElement('button');
     rmBtn.classList.add('rmBtn');
-    rmBtn.innerText = 'Remove'
+    rmBtn.innerText = 'Remove';
+
     rmBtn.addEventListener('click', removeBook);
     return rmBtn;
 }
 
-
+// Targets index of Remove button clicked and splices (removes) the stored book from the array and
+// the book card that goes with it
 function removeBook(event) {
     let index = event.target.parentNode.dataset.index;
     let card = event.target.parentNode;
     console.log(index);
     myLibrary.splice(index, 1);
     card.remove();
-    // librayDisplay();
     console.log(card);
     applyIndex();
 }
 
+// Adds index to each book card (div)
 function applyIndex() {
     let cards = document.querySelectorAll('div');
     for (let i = 1; i < cards.length; i++) {
@@ -94,31 +95,32 @@ function applyIndex() {
     }
 }
 
+librayDisplay();
 
-// for (let i = 0; i < myLibrary.length; i++) {
-//     const bookCard = document.createElement('div');
-//     bookCard.classList.add('card');
-//     container.appendChild(bookCard);
-//     bookCard.innerText = myLibrary[i].title + ' | ' + myLibrary[i].author + ' | ' + 
-//     myLibrary[i].pages + ' | ' + myLibrary[i].read + ' ';
-//     const btn = document.createElement('button');
-//     btn.innerText = 'Remove';
-//     btn.classList.add('rmBtn');
-//     btn.setAttribute('id', `rmBtn${i}`);
-//     bookCard.appendChild(btn);
+
+
+// Future update: Toggle read button
+// Add function somewhere to apply button
+// function toggleReadBtn() {
+//     const readBtn = document.createElement('button');
+//     readBtn.classList.add('readBtn');
+//     readBtn.innerText = 'Read';
+
+//     readBtn.addEventListener('click', readBook);
+//     return readBtn;
 // }
 
-// Remove book button
-// Create button element
-// Create button id and class
-//  -id for each specific book object in the library array
-//  -class to be removed from the element, which should drop it from the list
-// Create selectors so an array specific id can be selected and the
-//  overall button class can be added or removed
-// Append to each card
-// Add innertext
-// Set up css class
-// Create event listener to remove class which will remove the book stored in the array and
-//  refresh the library book list displayed
+// // Add way to target specific <p> element and toggle read status
+// function readBook(event) {
+//     let readCard = event.target.parentNode;
+//     if (readCard.innertext === 'read') {
+//         readCard.innerText = 'not read'
+//     } else {
+//         readCard.innertext = 'read'
+//     }
+//     // toggle()    
+// }
 
-// Read toggle button
+// Read toggle button:
+// Recreate remove button with index targeting
+// Click event that toggles the read status innertext
