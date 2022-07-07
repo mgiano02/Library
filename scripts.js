@@ -44,21 +44,69 @@ myLibrary.push(book2);
 
 // Loop that creates book cards and displays them in the library list
 function librayDisplay() {
-    for (let i = 0; i < myLibrary.length; i++) {
-        const bookCard = document.createElement('div');
+    while (container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
+    myLibrary.forEach((book) => {
+        let title = document.createElement('p');
+        let author = document.createElement('p');
+        let pages = document.createElement('p');
+        let read = document.createElement('p');
+        title.textContent = `Title: ${book.title}`;
+        author.textContent = `Author: ${book.author}`;
+        pages.textContent = `Pages: ${book.pages}`;
+        read.textContent = `Read: ${book.read}`;
+
+        let bookCard = document.createElement('div');
         bookCard.classList.add('card');
-        container.appendChild(bookCard);
-        bookCard.innerText = myLibrary[i].title + ' | ' + myLibrary[i].author + ' | ' + 
-        myLibrary[i].pages + ' | ' + myLibrary[i].read + " ";
-        const btn = document.createElement('button');
-        btn.innerText = 'Remove';
-        // btn.classList.add('rmBtn');
-        btn.setAttribute('id', `rmBtn${i}`);
-        bookCard.appendChild(btn);
+        // bookCard.setAttribute('bookNum', myLibrary.indexOf(book));
+        bookCard.append(title, author, pages, read, removeBookBtn());
+        container.append(bookCard);
+        applyIndex();
+    })
+}
+
+
+function removeBookBtn() {
+    const rmBtn = document.createElement('button');
+    rmBtn.classList.add('rmBtn');
+    rmBtn.innerText = 'Remove'
+    rmBtn.addEventListener('click', removeBook);
+    return rmBtn;
+}
+
+
+function removeBook(event) {
+    let index = event.target.parentNode.dataset.index;
+    let card = event.target.parentNode;
+    console.log(index);
+    myLibrary.splice(index, 1);
+    card.remove();
+    // librayDisplay();
+    console.log(card);
+    applyIndex();
+}
+
+function applyIndex() {
+    let cards = document.querySelectorAll('div');
+    for (let i = 1; i < cards.length; i++) {
+        cards[i].dataset.index = (i - 1);
     }
 }
 
 
+// for (let i = 0; i < myLibrary.length; i++) {
+//     const bookCard = document.createElement('div');
+//     bookCard.classList.add('card');
+//     container.appendChild(bookCard);
+//     bookCard.innerText = myLibrary[i].title + ' | ' + myLibrary[i].author + ' | ' + 
+//     myLibrary[i].pages + ' | ' + myLibrary[i].read + ' ';
+//     const btn = document.createElement('button');
+//     btn.innerText = 'Remove';
+//     btn.classList.add('rmBtn');
+//     btn.setAttribute('id', `rmBtn${i}`);
+//     bookCard.appendChild(btn);
+// }
 
 // Remove book button
 // Create button element
